@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "build:electron": "ng build --base-href ./ && cp ./projects/be/* dist",
+    "build:ui": "ng build --base-href ./",
+    "build:be": "npx tsc ./projects/be/app.ts --outDir ./dist/",
+    "build:electron": "npm run build:ui && npm run build:be && cp ./projects/be/package.json dist",
     "start:electron": "npm run build:electron && electron dist"
   },
   "private": true,
