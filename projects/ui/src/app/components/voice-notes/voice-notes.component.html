@@ -1,7 +1,5 @@
-<ng-container>
-    <p>
-        <audio controls *ngFor="let file of files">
-            <source src="{{file}}" type="audio/ogg">
-          </audio>
-    </p>
+<ng-container *ngFor="let file of files">
+    <div class="voice-notes-item">
+        <app-voice-note [voice-note]="file"></app-voice-note>
+    </div>
 </ng-container>

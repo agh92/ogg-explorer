@@ -24,7 +24,7 @@ export class ElectronIcpRendererService {
     this.ipc.send(event, args);
   }
 
-  public sendSync(event: string, args?: any[]) {
-    return this.ipc.sendSync(event, args);
+  public sendSync<T>(event: string, args?: any[]) {
+    return this.ipc.sendSync(event, args) as T;
   }
 }

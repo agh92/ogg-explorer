@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VoiceNotesService } from '../../services/voice-notes.service';
+import { VoiceNote, VoiceNotesService } from '../../services/voice-notes.service';
 
 @Component({
   selector: 'app-voice-notes',
@@ -8,12 +8,13 @@ import { VoiceNotesService } from '../../services/voice-notes.service';
 })
 export class VoiceNotesComponent implements OnInit {
 
-  public files!: string[];
+  public files!: VoiceNote[];
 
   constructor(private voiceNotesService: VoiceNotesService) { }
 
   ngOnInit(): void {
     this.files = this.voiceNotesService.voiceNotes;
+    console.log(`Number of voice notes ${this.files.length}`);
   }
 
 }
