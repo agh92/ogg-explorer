@@ -20,11 +20,11 @@ export class ElectronIcpRendererService {
     }
   }
 
-  public send(event: string, callback: () => void) {
-    this.ipc.send(event, callback);
+  public send(event: string, args?: any[]) {
+    this.ipc.send(event, args);
   }
 
-  public sendSync(event: string) {
-    return this.ipc.sendSync(event);
+  public sendSync(event: string, args?: any[]) {
+    return this.ipc.sendSync(event, args);
   }
 }

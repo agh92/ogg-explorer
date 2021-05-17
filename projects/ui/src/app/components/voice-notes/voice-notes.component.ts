@@ -16,8 +16,4 @@ export class VoiceNotesComponent implements OnInit {
     this.files = this.voiceNotesService.voiceNotes;
   }
 
-  public playFile(file: string) {
-    console.log(`play ${file}`);
-  }
-
 }

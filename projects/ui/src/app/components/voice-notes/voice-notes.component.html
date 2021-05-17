@@ -1,5 +1,7 @@
 <ng-container>
     <p>
-        <button *ngFor="let file of files" (click)="playFile(file)">{{file}}</button>
+        <audio controls *ngFor="let file of files">
+            <source src="{{file}}" type="audio/ogg">
+          </audio>
     </p>
 </ng-container>
