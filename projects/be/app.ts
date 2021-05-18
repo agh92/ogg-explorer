@@ -1,15 +1,11 @@
-import { InterProcessCommunicationService } from "./src/interprocess-comunnication.service";
-import { WindowInitializerService } from "./src/window-initializer.service";
+import { AppInitilizerService } from "./src/app-initilizer.service";
 
 const { app, } = require('electron');
 const path = require("path");
 
 function initApp() {
-  const windowInitialzer = new WindowInitializerService(path.join(__dirname, `index.html`));
-  windowInitialzer.initWindow();
-  
-  const communicationService = new InterProcessCommunicationService();
-  communicationService.setUpCommunicationEvents();
+  const appInitilizerService = new AppInitilizerService();
+  appInitilizerService.initApp(path.join(__dirname, `index.html`));
 }
 
 app.on('ready', initApp);

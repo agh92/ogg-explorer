@@ -15,15 +15,6 @@ export class VoiceNotesService {
   constructor(private icpService: ElectronIcpRendererService) { }
 
   get voiceNotes(): VoiceNote[] {
-    return this.icpService.sendSync<string[]>('voice-notes').map(file => ({ location: file, type: this.typeForFile(file), name: this.nameForFile(file) }));
+    return this.icpService.sendSync<VoiceNote[]>('voice-notes');
   }
-
-  private typeForFile(fileName: string) {
-    return fileName.endsWith('ogg') ? 'audio/ogg' : 'audio/aac';
-  }
-
-  private nameForFile(fileName: string) {
-    return fileName.replace(/^.*[\\\/]/, '');
-  }
-
 }
