@@ -4,9 +4,9 @@ import { takeUntil } from 'rxjs/operators';
 import { VoiceNote, VoiceNotesService } from '../../services/voice-notes.service';
 
 enum SortBy {
-  NONE,
-  LENGTH_ASCENDING,
-  LENGTH_DECENDING
+  NONE = 'none',
+  LENGTH_ASCENDING = 'acending',
+  LENGTH_DECENDING = 'descending'
 }
 
 @Component({
@@ -17,11 +17,9 @@ enum SortBy {
 export class VoiceNotesComponent implements OnInit, OnDestroy {
 
   public voiceNotes!: VoiceNote[];
-  private unsortedFiles?: VoiceNote[];
-  private sortedByLegnthAscending!: VoiceNote[];
-  private sortedByLegnthDescending!: VoiceNote[];
+  private unsortedVoiceNotes!: VoiceNote[];
 
-  private currentSorting: SortBy = SortBy.NONE;
+  private nextSorting: SortBy = SortBy.LENGTH_ASCENDING;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -32,6 +30,7 @@ export class VoiceNotesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.voiceNotesService.voiceNotes$.pipe(takeUntil(this.unsubscribe$)).subscribe((notes) => {
       this.voiceNotes = notes;
+      this.unsortedVoiceNotes = notes;
       this.changeDetector.detectChanges();
     });
   }
@@ -42,17 +41,38 @@ export class VoiceNotesComponent implements OnInit, OnDestroy {
   }
 
   public sortVoiceNotes() {
-    switch (this.currentSorting) {
-      case SortBy.NONE:
+    const currentSorting = this.nextSorting;
+    this.nextSorting = this.getNexSorting(currentSorting);
+    if (currentSorting === SortBy.NONE) {
+      this.voiceNotes = this.unsortedVoiceNotes;
+    } else {
+      const sortingFunction = this.getSortingFunction(currentSorting);
+      this.voiceNotes = [...this.unsortedVoiceNotes].sort(sortingFunction);
+    }
+    this.changeDetector.detectChanges();
+  }
 
-        break;
-      case SortBy.LENGTH_ASCENDING:
-
-        break;
+  private getSortingFunction(currentSorting: SortBy): (a: VoiceNote, b: VoiceNote) => number {
+    switch (currentSorting) {
       case SortBy.LENGTH_DECENDING:
-
-        break;
+        return (a, b) => ((b.length ? b.length : 0) - (a.length ? a.length : 0));
+      case SortBy.LENGTH_ASCENDING:
+        return (a, b) => ((a.length ? a.length : 0) - (b.length ? b.length : 0));
+      default:
+        throw new Error("Unsupported sorting");
     }
   }
 
+  private getNexSorting(currentSorting: SortBy) {
+    switch (currentSorting) {
+      case SortBy.NONE:
+        return SortBy.LENGTH_ASCENDING;
+      case SortBy.LENGTH_ASCENDING:
+        return SortBy.LENGTH_DECENDING;
+      case SortBy.LENGTH_DECENDING:
+        return SortBy.NONE;
+      default:
+        throw new Error("Unsupported sorting");
+    }
+  }
 }
