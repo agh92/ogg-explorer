@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IpcRenderer } from "electron";
+import { IpcRenderer, IpcRendererEvent } from "electron";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ export class ElectronIcpRendererService {
 
   private ipc!: IpcRenderer;
 
-  constructor() { 
+  constructor() {
     if (window.require) {
       try {
         this.ipc = window.require('electron').ipcRenderer;
@@ -18,6 +18,10 @@ export class ElectronIcpRendererService {
     } else {
       console.warn('Electron\'s IPC was not loaded');
     }
+  }
+
+  public on<T>(channel: string, callback: (event: IpcRendererEvent, args?: T) => void) {
+    this.ipc.on(channel, callback);
   }
 
   public send(event: string, args?: any[]) {

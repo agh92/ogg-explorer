@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { VoiceNote, VoiceNotesService } from '../../services/voice-notes.service';
 
 enum SortBy {
@@ -12,28 +14,37 @@ enum SortBy {
   templateUrl: './voice-notes.component.html',
   styleUrls: ['./voice-notes.component.scss']
 })
-export class VoiceNotesComponent implements OnInit {
+export class VoiceNotesComponent implements OnInit, OnDestroy {
 
-  public files!: VoiceNote[];
-
-  private currentSorting: SortBy = SortBy.NONE;
-
-  private unsortedFiles!: VoiceNote[];
+  public voiceNotes!: VoiceNote[];
+  private unsortedFiles?: VoiceNote[];
   private sortedByLegnthAscending!: VoiceNote[];
   private sortedByLegnthDescending!: VoiceNote[];
 
-  constructor(private voiceNotesService: VoiceNotesService) { }
+  private currentSorting: SortBy = SortBy.NONE;
+
+  private unsubscribe$ = new Subject<void>();
+
+  constructor(
+    private voiceNotesService: VoiceNotesService,
+    private readonly changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.unsortedFiles = this.voiceNotesService.voiceNotes;
-    this.files = this.voiceNotesService.voiceNotes;
-    console.log(`Number of voice notes ${this.unsortedFiles.length}`);
+    this.voiceNotesService.voiceNotes$.pipe(takeUntil(this.unsubscribe$)).subscribe((notes) => {
+      this.voiceNotes = notes;
+      this.changeDetector.detectChanges();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public sortVoiceNotes() {
     switch (this.currentSorting) {
       case SortBy.NONE:
-        
+
         break;
       case SortBy.LENGTH_ASCENDING:
 

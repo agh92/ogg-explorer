@@ -6,7 +6,9 @@
     "build:ui": "ng build --base-href ./",
     "build:be": "npx tsc ./projects/be/app.ts --outDir ./dist/",
     "build:electron": "npm run build:ui && npm run build:be && cp ./projects/be/package.json dist",
-    "start:electron": "npm run build:electron && electron dist"
+    "start:electron": "npm run build:electron && electron --trace-deprecation dist",
+    "rebuild:electron": "electron-rebuild",
+    "install:ogg": "npm i ./../node-ogg/ && npm run rebuild:electron"
   },
   "private": true,
   "dependencies": {
@@ -18,7 +20,8 @@
     "@angular/platform-browser": "~12.0.0",
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
-    "rxjs": "~6.6.0",
+    "ogg": "file:../node-ogg",
+    "rxjs": "^6.6.7",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
   },
@@ -30,6 +33,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^14.14.45",
     "electron": "^12.0.7",
+    "electron-rebuild": "^2.3.5",
     "jasmine-core": "~3.7.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

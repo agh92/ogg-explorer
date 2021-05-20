@@ -1,7 +1,5 @@
-<button (click)="sortVoiceNotes()">Sort by length</button>
+<div>
+    <button (click)="sortVoiceNotes()">Sort by length</button>
+</div>
 
-<ng-container *ngFor="let file of files">
-    <div class="voice-notes-item">
-        <app-voice-note [voice-note]="file"></app-voice-note>
-    </div>
-</ng-container>
+<app-voice-note *ngFor="let voiceNote of voiceNotes" [voice-note]="voiceNote"></app-voice-note>

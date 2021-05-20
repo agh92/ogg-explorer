@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Observable, ReplaySubject } from 'rxjs';
 import { ElectronIcpRendererService } from './electron-icp-renderer.service';
 
 export interface VoiceNote {
   name: string,
   location: string,
-  type: string
+  type: string,
+  length?: number
 }
 
 @Injectable({
@@ -12,9 +14,18 @@ export interface VoiceNote {
 })
 export class VoiceNotesService {
 
-  constructor(private icpService: ElectronIcpRendererService) { }
+  private _voiceNotes$: ReplaySubject<VoiceNote[]> = new ReplaySubject(1);
 
-  get voiceNotes(): VoiceNote[] {
-    return this.icpService.sendSync<VoiceNote[]>('voice-notes');
+  constructor(private icpService: ElectronIcpRendererService) {
+    this.icpService.on<VoiceNote[]>('voice-notes', (event, args) => {
+      if (args) {
+        this._voiceNotes$.next(args);
+      }
+    });
+    this.icpService.send('voice-notes');
+  }
+
+  get voiceNotes$(): Observable<VoiceNote[]> {
+    return this._voiceNotes$.asObservable();
   }
 }
