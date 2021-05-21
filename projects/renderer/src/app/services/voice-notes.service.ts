@@ -12,12 +12,9 @@ export class VoiceNotesService {
   private _voiceNotes$ = new ReplaySubject<VoiceNote[]>(1);
 
   constructor(private icpService: ElectronIcpRendererService) {
-
-    icpService.on<VoiceNote[]>('voice-notes', (evet, voiceNotes) => {
+    icpService.on<VoiceNote[]>('voice-notes', (_, voiceNotes) => {
       this._voiceNotes$.next(voiceNotes);
     });
-
-    this.icpService.invoke<VoiceNote[]>('voice-notes').then(notes => this._voiceNotes$.next(notes));
   }
 
   get voiceNotes$(): Observable<VoiceNote[]> {
