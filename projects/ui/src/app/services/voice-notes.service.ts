@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { ElectronIcpRendererService } from './electron-icp-renderer.service';
 
 export interface VoiceNote {
@@ -14,18 +14,18 @@ export interface VoiceNote {
 })
 export class VoiceNotesService {
 
-  private _voiceNotes$: ReplaySubject<VoiceNote[]> = new ReplaySubject(1);
-
-  constructor(private icpService: ElectronIcpRendererService) {
-    this.icpService.on<VoiceNote[]>('voice-notes', (event, args) => {
-      if (args) {
-        this._voiceNotes$.next(args);
-      }
-    });
-    this.icpService.send('voice-notes');
-  }
+  constructor(private icpService: ElectronIcpRendererService) { }
 
   get voiceNotes$(): Observable<VoiceNote[]> {
-    return this._voiceNotes$.asObservable();
+    return from(this.icpService.invoke<VoiceNote[]>('voice-notes'));
+  }
+
+  public async playRandomVoiceNote() {
+    try {
+      const file = await this.icpService.invoke<string>('voice-notes-play-random');
+      console.log(`played ${file}`);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

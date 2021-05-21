@@ -3,7 +3,7 @@ import { ipcMain } from 'electron';
 
 export class InterProcessCommunicationService {
 
-    public on(channel: string, callback: (event: Electron.IpcMainEvent, ...args: any[]) => void): void {
-        ipcMain.on(channel, callback);
+    public handle(channel: string, callback: (event: any, ...args: any[]) => void) {
+        ipcMain.handle(channel, callback);
     }
 }

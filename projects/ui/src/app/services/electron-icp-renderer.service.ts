@@ -20,15 +20,7 @@ export class ElectronIcpRendererService {
     }
   }
 
-  public on<T>(channel: string, callback: (event: IpcRendererEvent, args?: T) => void) {
-    this.ipc.on(channel, callback);
-  }
-
-  public send(event: string, args?: any[]) {
-    this.ipc.send(event, args);
-  }
-
-  public sendSync<T>(event: string, args?: any[]) {
-    return this.ipc.sendSync(event, args) as T;
+  public async invoke<T>(channel: string): Promise<T> {
+    return this.ipc.invoke(channel);
   }
 }

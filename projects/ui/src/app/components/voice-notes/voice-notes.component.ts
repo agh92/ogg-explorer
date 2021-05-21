@@ -40,6 +40,10 @@ export class VoiceNotesComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
+  public playRandom() {
+    this.voiceNotesService.playRandomVoiceNote();
+  }
+
   public sortVoiceNotes() {
     const currentSorting = this.nextSorting;
     this.nextSorting = this.getNexSorting(currentSorting);
