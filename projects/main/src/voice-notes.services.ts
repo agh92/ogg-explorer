@@ -1,14 +1,9 @@
 import { InterProcessCommunicationService } from "./interprocess-comunnication.service";
 import * as fileUtils from "./file.utils";
+import { VoiceNote } from "interfaces";
 
 const path = require('path');
 
-export interface VoiceNote {
-    name: string,
-    location: string,
-    type: string,
-    length?: number
-}
 
 const SUPPORTED_FORMATS = ['ogg', 'aac'];
 const VOICE_NOTES_LOCATION = '/Users/andresgilherrera/Downloads';

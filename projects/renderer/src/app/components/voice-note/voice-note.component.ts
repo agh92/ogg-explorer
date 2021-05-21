@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { VoiceNote } from '../../services/voice-notes.service';
+import { VoiceNote } from "interfaces";
 
 @Component({
   selector: 'app-voice-note',

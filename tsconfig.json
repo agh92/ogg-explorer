@@ -4,9 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "be": [
-        "dist/main/main",
-        "dist/main"
+      "interfaces": [
+        "dist/interfaces/interfaces",
+        "dist/interfaces"
       ]
     },
     "outDir": "./dist/out-tsc",

@@ -2,7 +2,7 @@
   "name": "main",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./main/bundles/main.umd.js",
   "scripts": {  },
   "author": "",
   "license": "ISC"

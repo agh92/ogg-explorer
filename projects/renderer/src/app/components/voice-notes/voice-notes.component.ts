@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { VoiceNote, VoiceNotesService } from '../../services/voice-notes.service';
+import { VoiceNotesService } from '../../services/voice-notes.service';
+import { VoiceNote } from "interfaces";
 
 enum SortBy {
   NONE = 'none',

@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "deleteOutputPath": false,
             "outputPath": "dist",
             "index": "projects/renderer/src/index.html",
             "main": "projects/renderer/src/main.ts",
@@ -101,6 +102,52 @@
             ],
             "scripts": []
           }
+        }
+      }
+    },
+    "interfaces": {
+      "projectType": "library",
+      "root": "projects/interfaces",
+      "sourceRoot": "projects/interfaces/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/interfaces/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/interfaces/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/interfaces/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "main": {
+      "projectType": "library",
+      "root": "projects/main",
+      "sourceRoot": "projects/main/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/main/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/main/tsconfig.main.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/main/tsconfig.main.json"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

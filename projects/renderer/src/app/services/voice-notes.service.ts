@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
+import { VoiceNote } from 'interfaces';
 import { from, Observable } from 'rxjs';
 import { ElectronIcpRendererService } from './electron-icp-renderer.service';
 
-export interface VoiceNote {
-  name: string,
-  location: string,
-  type: string,
-  length?: number
-}
 
 @Injectable({
   providedIn: 'root'

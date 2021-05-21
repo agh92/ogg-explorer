@@ -4,9 +4,11 @@
   "main": "dist/app.js",
   "scripts": {
     "build:renderer": "ng build --base-href ./",
-    "build:main": "npx tsc ./projects/main/app.ts --outDir ./dist/",
-    "build:electron": "npm run build:renderer && npm run build:main && cp ./projects/main/package.json dist",
-    "start:electron": "npm run build:electron && electron --trace-deprecation dist",
+    "build:main": "ng build main",
+    "build:interfaces": "ng build interfaces",
+    "build:electron": "npm run build:interfaces && npm run build:main && npm run build:renderer && cp ./projects/main/package.json dist",
+    "clean:dist": "rm -f -r ./dist",
+    "start:electron": "npm run clean:dist && npm run build:electron && electron dist",
     "rebuild:electron": "electron-rebuild",
     "install:ogg": "npm i ./../node-ogg/ && npm run rebuild:electron"
   },
