@@ -1,13 +1,17 @@
 import { PathLike } from "fs";
 
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, WebContents } from 'electron';
 const url = require("url");
 
 export class WindowInitializerService {
 
-    public appWindow!: BrowserWindow;
+    private appWindow!: BrowserWindow;
 
     constructor(private indexPath: PathLike) { }
+
+    get webContents(): WebContents {
+        return this.appWindow.webContents;
+    }
 
     public initWindow() {
         this.appWindow = new BrowserWindow({

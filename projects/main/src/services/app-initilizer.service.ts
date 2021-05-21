@@ -12,7 +12,7 @@ export class AppInitilizerService {
 
         const menuService = new AppMenuService();
 
-        const communicationService = new InterProcessCommunicationService(windowInitialzer.appWindow.webContents);
+        const communicationService = new InterProcessCommunicationService(windowInitialzer.webContents);
         const voiceNoteService = new VoiceNoteService(communicationService);
 
         menuService.addMenuItems(...voiceNoteService.menuItems);

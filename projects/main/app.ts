@@ -1,4 +1,4 @@
-import { AppInitilizerService } from "./src/app-initilizer.service";
+import { AppInitilizerService } from "./src/services/app-initilizer.service";
 
 const { app, } = require('electron');
 const path = require("path");
