@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "build:ui": "ng build --base-href ./",
-    "build:be": "npx tsc ./projects/be/app.ts --outDir ./dist/",
-    "build:electron": "npm run build:ui && npm run build:be && cp ./projects/be/package.json dist",
+    "build:renderer": "ng build --base-href ./",
+    "build:main": "npx tsc ./projects/main/app.ts --outDir ./dist/",
+    "build:electron": "npm run build:renderer && npm run build:main && cp ./projects/main/package.json dist",
     "start:electron": "npm run build:electron && electron --trace-deprecation dist",
     "rebuild:electron": "electron-rebuild",
     "install:ogg": "npm i ./../node-ogg/ && npm run rebuild:electron"

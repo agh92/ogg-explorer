@@ -5,8 +5,8 @@
     "baseUrl": "./",
     "paths": {
       "be": [
-        "dist/be/be",
-        "dist/be"
+        "dist/main/main",
+        "dist/main"
       ]
     },
     "outDir": "./dist/out-tsc",
