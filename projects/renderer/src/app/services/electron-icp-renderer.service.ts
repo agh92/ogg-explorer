@@ -20,6 +20,10 @@ export class ElectronIcpRendererService {
     }
   }
 
+  public on<T>(channel: string, callback: (event: IpcRendererEvent, args?: T) => void) {
+    this.ipc.on(channel, callback);
+  }
+
   public async invoke<T>(channel: string): Promise<T> {
     return this.ipc.invoke(channel);
   }

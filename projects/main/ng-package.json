@@ -2,6 +2,9 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/main",
   "lib": {
-    "entryFile": "app.ts"
+    "entryFile": "app.ts",
+    "umdModuleIds": {
+      "electron": "electron"
+    }
   }
 }
