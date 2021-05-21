@@ -11,7 +11,8 @@
     "build:start:electron": "npm run build:electron && npm run start:electron",
     "start:electron": "electron dist",
     "rebuild:electron": "electron-rebuild",
-    "install:ogg": "npm i ./../node-ogg/ && npm run rebuild:electron"
+    "install:ogg": "npm i ./../node-ogg/ && npm run rebuild:electron",
+    "pack:electron": "cd dist && electron-packager . memorial "
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^14.14.45",
     "electron": "^12.0.7",
+    "electron-packager": "^15.2.0",
     "electron-rebuild": "^2.3.5",
     "jasmine-core": "~3.7.0",
     "karma": "~6.3.0",
