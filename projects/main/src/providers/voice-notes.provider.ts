@@ -3,16 +3,15 @@ import * as fileUtils from "../utils/file.utils";
 
 const path = require('path');
 
-const VOICE_NOTES_LOCATION = '/Users/andresgilherrera/Downloads';
 const SUPPORTED_FORMATS = ['ogg', 'aac'];
 
 export class VoiceNotesProvider {
 
-    public getVoiceNotes(): Promise<VoiceNote[]> {
+    public getVoiceNotes(voiceNotesLocation: string): Promise<VoiceNote[]> {
         const returnValue = fileUtils
-            .readContentsOfDir(VOICE_NOTES_LOCATION, this.isFormatSupported)
+            .readContentsOfDir(voiceNotesLocation, this.isFormatSupported)
             .map(async file => {
-                const location = path.join(VOICE_NOTES_LOCATION, file);
+                const location = path.join(voiceNotesLocation, file);
                 const type = this.typeForFile(file);
                 return {
                     location,
