@@ -12,7 +12,7 @@
     "release:electron": "npm run build:electron && npm run pack:electron",
     "pack:electron": "cp -r ./node_modules ./dist && cd dist && electron-packager . ogg-explorer --out ./../release",
     "clean:dist": "rm -f -r ./dist",
-    "install:ogg": "npm i ./../node-ogg/ && electron-rebuild"
+    "install:ogg": "npm i git://github.com/agh92/node-ogg.git#develop && electron-rebuild"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +24,7 @@
     "@angular/platform-browser": "~12.0.0",
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
-    "ogg": "file:../node-ogg",
+    "ogg": "git://github.com/agh92/node-ogg.git#develop",
     "rxjs": "^6.6.7",
     "sound-play": "^1.1.0",
     "tslib": "^2.1.0",
