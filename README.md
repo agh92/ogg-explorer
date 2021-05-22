@@ -1,27 +1,18 @@
-# Memorial
+# OGG Explorer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+This is an utility application that allows you to load a directory and display all ogg files inside it and play them. It was created from the need of have an interface for a bunch of ogg files downloaded from whatsapp web. 
 
-## Development server
+The project was created with the angular cli and is based on alectron. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Run
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `npm run buld:start:electron` to run a dev build of the application.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npm run release:electron` to bundles the application to an executable (for the current platform) and ready for distribution. The executable will be stored in the `release/` directory.
 
-## Running unit tests
+## Want to contribute?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Just create a feature branch or fork the repo and make a pull request.
+§§
