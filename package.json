@@ -6,13 +6,13 @@
     "build:renderer": "ng build --base-href ./",
     "build:main": "ng build main",
     "build:interfaces": "ng build interfaces",
-    "build:electron": "npm run clean:dist && npm run build:interfaces && npm run build:main && npm run build:renderer && cp ./projects/main/package.json dist",
-    "clean:dist": "rm -f -r ./dist",
+    "build:electron": "npm run clean:dist && npm run build:interfaces && npm run build:main && npm run build:renderer && cp ./package.json dist",
     "build:start:electron": "npm run build:electron && npm run start:electron",
     "start:electron": "electron dist",
-    "rebuild:electron": "electron-rebuild",
-    "install:ogg": "npm i ./../node-ogg/ && npm run rebuild:electron",
-    "pack:electron": "cd dist && electron-packager . memorial "
+    "release:electron": "npm run build:electron && npm run pack:electron",
+    "pack:electron": "cp -r ./node_modules ./dist && cd dist && electron-packager . memorial",
+    "clean:dist": "rm -f -r ./dist",
+    "install:ogg": "npm i ./../node-ogg/ && electron-rebuild"
   },
   "private": true,
   "dependencies": {
