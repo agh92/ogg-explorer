@@ -10,7 +10,7 @@
     "build:start:electron": "npm run build:electron && npm run start:electron",
     "start:electron": "electron dist",
     "release:electron": "npm run build:electron && npm run pack:electron",
-    "pack:electron": "cp -r ./node_modules ./dist && cd dist && electron-packager . memorial",
+    "pack:electron": "cp -r ./node_modules ./dist && cd dist && electron-packager . memorial --out ./../release",
     "clean:dist": "rm -f -r ./dist",
     "install:ogg": "npm i ./../node-ogg/ && electron-rebuild"
   },
