@@ -1,4 +1,5 @@
-const { app, Menu } = require('electron')
+import { App, shell, Menu } from "electron";
+import defaultMenu from 'electron-default-menu';
 
 export interface MenuItemProvider {
     menuItems: Electron.MenuItemConstructorOptions[]
@@ -7,21 +8,29 @@ export interface MenuItemProvider {
 export class AppMenuService {
 
     private items: Electron.MenuItemConstructorOptions[] = [];
-    private menuTemplate = [
-        {
-            label: 'Voice Notes',
-            submenu: this.items
-        }
-    ];
 
-    constructor() { }
+    private appDefaultMenu: Electron.MenuItemConstructorOptions[];
 
-    public initMenu() {
-        const menu = Menu.buildFromTemplate(this.menuTemplate);
-        Menu.setApplicationMenu(menu);
+    constructor(app: App) {
+        this.appDefaultMenu = defaultMenu(app, shell);
     }
 
-    public addMenuItems(...items: Electron.MenuItemConstructorOptions[]) {
+    public initMenu() {
+        // replace default edit
+        this.appDefaultMenu[1] = {
+            label: 'Edit',
+            submenu: this.items
+        };
+        this.setHelpUrl();
+        Menu.setApplicationMenu(Menu.buildFromTemplate(this.appDefaultMenu));
+    }
+
+    private setHelpUrl() {
+        const helpMenu = this.appDefaultMenu.find(menu => menu.role === 'help');
+        (helpMenu?.submenu as Electron.MenuItemConstructorOptions[])[0].click = () => shell.openExternal('https://github.com/agh92/ogg-explorer');
+    }
+
+    public addEditMenuItems(...items: Electron.MenuItemConstructorOptions[]) {
         this.items.push(...items);
     }
 }

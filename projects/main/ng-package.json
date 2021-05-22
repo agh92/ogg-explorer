@@ -4,7 +4,8 @@
   "lib": {
     "entryFile": "app.ts",
     "umdModuleIds": {
-      "electron": "electron"
+      "electron": "electron",
+      "electron-default-menu": "electron-default-menu"
     }
   }
 }

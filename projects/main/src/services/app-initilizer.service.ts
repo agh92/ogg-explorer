@@ -13,13 +13,13 @@ export class AppInitilizerService {
     initApp(app: App, indexLocation: PathLike) {
         const windowInitialzer = new WindowInitializerService(app, indexLocation);
         windowInitialzer.initWindow();
-
-        const menuService = new AppMenuService();
+        
+        const menuService = new AppMenuService(app);
 
         const communicationService = new InterProcessCommunicationService(windowInitialzer.webContents);
         const voiceNoteService = new VoiceNoteService(communicationService);
 
-        menuService.addMenuItems(...voiceNoteService.menuItems);
+        menuService.addEditMenuItems(...voiceNoteService.menuItems);
         menuService.initMenu();
     }
 }
