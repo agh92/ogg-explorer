@@ -1,13 +1,15 @@
 import { PathLike } from "fs";
 
-import { BrowserWindow, WebContents } from 'electron';
+import { App, BrowserWindow, WebContents } from 'electron';
 const url = require("url");
 
 export class WindowInitializerService {
 
     private appWindow!: BrowserWindow;
 
-    constructor(private indexPath: PathLike) { }
+    constructor(
+        private app: App,
+        private indexPath: PathLike) { }
 
     get webContents(): WebContents {
         return this.appWindow.webContents;
@@ -33,7 +35,9 @@ export class WindowInitializerService {
         );
 
         // Initialize the DevTools.
-        this.appWindow.webContents.openDevTools()
+        if (!this.app.isPackaged) {
+            this.appWindow.webContents.openDevTools();
+        }
 
         this.appWindow.on('closed', () => {
             this.appWindow = null as any;

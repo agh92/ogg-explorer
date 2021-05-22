@@ -1,3 +1,4 @@
+import { App } from "electron";
 import { PathLike } from "fs";
 import { AppMenuService } from "./app-menu.service";
 import { InterProcessCommunicationService } from "./interprocess-comunnication.service";
@@ -6,8 +7,11 @@ import { WindowInitializerService } from "./window-initializer.service";
 
 
 export class AppInitilizerService {
-    initApp(indexLocation: PathLike) {
-        const windowInitialzer = new WindowInitializerService(indexLocation);
+
+    constructor() { }
+
+    initApp(app: App, indexLocation: PathLike) {
+        const windowInitialzer = new WindowInitializerService(app, indexLocation);
         windowInitialzer.initWindow();
 
         const menuService = new AppMenuService();

@@ -15,7 +15,7 @@ function removePartsOfPath(path: string, parts: number): string {
 function initApp() {
   const appInitilizerService = new AppInitilizerService();
   const indexDir = removePartsOfPath(__dirname, 2);
-  appInitilizerService.initApp(path.join(indexDir, 'index.html'));
+  appInitilizerService.initApp(app, path.join(indexDir, 'index.html'));
 }
 
 app.on('ready', initApp);
