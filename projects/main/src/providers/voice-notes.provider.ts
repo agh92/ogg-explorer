@@ -1,9 +1,8 @@
 import { VoiceNote } from "interfaces";
 import * as fileUtils from "../utils/file.utils";
+import path from 'path';
 
-const path = require('path');
-
-const SUPPORTED_FORMATS = ['ogg', 'aac'];
+const SUPPORTED_FORMATS = ['ogg'];
 
 export class VoiceNotesProvider {
 
@@ -12,19 +11,14 @@ export class VoiceNotesProvider {
             .readContentsOfDir(voiceNotesLocation, this.isFormatSupported)
             .map(async file => {
                 const location = path.join(voiceNotesLocation, file);
-                const type = this.typeForFile(file);
                 return {
                     location,
-                    type,
+                    type: 'audio/ogg',
                     name: file,
-                    length: type === 'audio/ogg' ? await fileUtils.countOggPackets(location) : 0
-                }
+                    length: await fileUtils.countOggPackets(location)
+                } as VoiceNote
             });
         return Promise.all(returnValue);
-    }
-
-    private typeForFile(fileName: string) {
-        return fileName.endsWith('ogg') ? 'audio/ogg' : 'audio/aac';
     }
 
     private isFormatSupported(file: string) {

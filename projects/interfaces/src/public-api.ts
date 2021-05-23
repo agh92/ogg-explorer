@@ -1,10 +1,6 @@
-/*
- * Public API Surface of interfaces
- */
-
 export interface VoiceNote {
     name: string,
     location: string,
-    type: string,
+    type: 'audio/ogg',
     length: number
 }

@@ -1,6 +1,7 @@
 {
   "name": "oggexplorer",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "Andrés Gil Herrera",
   "main": "./main/bundles/main.umd.js",
   "scripts": {
     "build:renderer": "ng build --base-href ./",

@@ -5,7 +5,10 @@
     "entryFile": "app.ts",
     "umdModuleIds": {
       "electron": "electron",
-      "electron-default-menu": "electron-default-menu"
+      "electron-default-menu": "electron-default-menu",
+      "path": "path",
+      "url": "url",
+      "fs": "fs"
     }
   }
 }

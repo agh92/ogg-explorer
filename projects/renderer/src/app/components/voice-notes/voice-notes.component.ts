@@ -6,8 +6,7 @@ import { VoiceNote } from "interfaces";
 
 @Component({
   selector: 'app-voice-notes',
-  templateUrl: './voice-notes.component.html',
-  styleUrls: ['./voice-notes.component.scss']
+  templateUrl: './voice-notes.component.html'
 })
 export class VoiceNotesComponent implements OnInit, OnDestroy {
 

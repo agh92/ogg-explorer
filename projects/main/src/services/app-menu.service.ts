@@ -8,7 +8,6 @@ export interface MenuItemProvider {
 export class AppMenuService {
 
     private items: Electron.MenuItemConstructorOptions[] = [];
-
     private appDefaultMenu: Electron.MenuItemConstructorOptions[];
 
     constructor(app: App) {

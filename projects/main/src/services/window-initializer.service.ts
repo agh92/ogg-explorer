@@ -1,7 +1,5 @@
-import { PathLike } from "fs";
-
 import { App, BrowserWindow, WebContents } from 'electron';
-const url = require("url");
+import url from "url";
 
 export class WindowInitializerService {
 
@@ -9,7 +7,7 @@ export class WindowInitializerService {
 
     constructor(
         private app: App,
-        private indexPath: PathLike) { }
+        private indexPath: string) { }
 
     get webContents(): WebContents {
         return this.appWindow.webContents;

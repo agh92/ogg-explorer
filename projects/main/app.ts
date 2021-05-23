@@ -1,16 +1,7 @@
 import { AppInitilizerService } from "./src/services/app-initilizer.service";
-
-const { app, } = require('electron');
-const path = require("path");
-
-
-function removePartsOfPath(path: string, parts: number): string {
-  if (parts === 0) {
-    return path;
-  }
-  const temp = path.substring(0, path.lastIndexOf("/"));
-  return removePartsOfPath(temp, --parts);
-}
+import { removePartsOfPath } from "./src/utils/file.utils";
+import { app } from 'electron';
+import path from "path";
 
 function initApp() {
   const appInitilizerService = new AppInitilizerService();

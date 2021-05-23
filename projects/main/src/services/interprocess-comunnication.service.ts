@@ -1,6 +1,5 @@
 import { ipcMain, WebContents } from 'electron';
 
-
 export class InterProcessCommunicationService {
 
     constructor(private webContents: WebContents) {}

@@ -1,16 +1,14 @@
 import { App } from "electron";
-import { PathLike } from "fs";
 import { AppMenuService } from "./app-menu.service";
 import { InterProcessCommunicationService } from "./interprocess-comunnication.service";
 import { VoiceNoteService } from "./voice-notes.services";
 import { WindowInitializerService } from "./window-initializer.service";
 
-
 export class AppInitilizerService {
 
     constructor() { }
 
-    initApp(app: App, indexLocation: PathLike) {
+    initApp(app: App, indexLocation: string) {
         const windowInitialzer = new WindowInitializerService(app, indexLocation);
         windowInitialzer.initWindow();
         

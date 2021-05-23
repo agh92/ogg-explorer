@@ -1,8 +1,4 @@
 {
   "name": "main",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./main/bundles/main.umd.js",
-  "author": "",
-  "license": "ISC"
+  "version": "0.0.1"
 }
