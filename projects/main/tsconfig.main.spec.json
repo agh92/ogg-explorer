@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "interfaces": [
+        "../../dist/interfaces/interfaces",
+        "../../dist/interfaces"
+      ]
+    },
+    "module": "commonjs",
+    "target": "es2020",
+    "lib": [
+      "es2020"
+    ],
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "inlineSourceMap": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*.ts",
+  ]
+}

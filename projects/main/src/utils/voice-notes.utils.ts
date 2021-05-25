@@ -6,37 +6,31 @@ export enum SortBy {
     LENGTH_DECENDING = 'descending'
 }
 
+const nextSortingLookUp: Map<SortBy, SortBy> = new Map(
+    [
+        [SortBy.NONE, SortBy.LENGTH_ASCENDING],
+        [SortBy.LENGTH_ASCENDING, SortBy.LENGTH_DECENDING],
+        [SortBy.LENGTH_DECENDING, SortBy.NONE]
+    ]
+);
+
+const sortingFunctionLookUp: Map<SortBy, (a: VoiceNote, b: VoiceNote) => number> = new Map(
+    [
+        [SortBy.NONE, (a, b) => 0],
+        [SortBy.LENGTH_ASCENDING, (a, b) => a.length - b.length],
+        [SortBy.LENGTH_DECENDING, (a, b) => b.length - a.length]
+    ]
+);
+
 export function sortVoiceNotes(unsortedVoiceNotes: VoiceNote[], sortBy: SortBy): { voiceNotes: VoiceNote[], nextSorting: SortBy } {
     const nextSorting = getNexSorting(sortBy);
-
-    if (sortBy !== SortBy.NONE) {
-        const sortingFunction = getSortingFunction(sortBy);
-        return { voiceNotes: [...unsortedVoiceNotes].sort(sortingFunction), nextSorting };
-    }
-
-    return { voiceNotes: unsortedVoiceNotes, nextSorting };
-}
-
-function getSortingFunction(currentSorting: SortBy): (a: VoiceNote, b: VoiceNote) => number {
-    switch (currentSorting) {
-        case SortBy.LENGTH_DECENDING:
-            return (a, b) => (b.length - a.length);
-        case SortBy.LENGTH_ASCENDING:
-            return (a, b) => (a.length - b.length);
-        default:
-            throw new Error("Unsupported sorting");
-    }
+    const sortingFunction = sortingFunctionLookUp.get(sortBy);
+    return {
+        voiceNotes: sortingFunction ? [...unsortedVoiceNotes].sort(sortingFunction) : unsortedVoiceNotes,
+        nextSorting: nextSorting ? nextSorting : SortBy.NONE
+    };
 }
 
 function getNexSorting(currentSorting: SortBy) {
-    switch (currentSorting) {
-        case SortBy.NONE:
-            return SortBy.LENGTH_ASCENDING;
-        case SortBy.LENGTH_ASCENDING:
-            return SortBy.LENGTH_DECENDING;
-        case SortBy.LENGTH_DECENDING:
-            return SortBy.NONE;
-        default:
-            throw new Error("Unsupported sorting");
-    }
+    return nextSortingLookUp.get(currentSorting);
 }

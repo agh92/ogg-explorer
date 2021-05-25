@@ -4,6 +4,9 @@
   "author": "Andrés Gil Herrera",
   "main": "./main/bundles/main.umd.js",
   "scripts": {
+    "test:main": "TS_NODE_PROJECT=\"projects/main/tsconfig.main.spec.json\" nyc mocha -r ts-node/register projects/main/src/**/*.spec.ts",
+    "test:renderer": "ng test renderer",
+    "test:all": "npm run test:main && npm run test:renderer",
     "build:renderer": "ng build --base-href ./",
     "build:main": "ng build main",
     "build:interfaces": "ng build interfaces",
@@ -37,9 +40,14 @@
     "@angular-devkit/build-angular": "~12.0.0",
     "@angular/cli": "~12.0.0",
     "@angular/compiler-cli": "~12.0.0",
+    "@types/chai": "^4.2.18",
     "@types/electron": "^1.6.10",
     "@types/jasmine": "~3.6.0",
+    "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.45",
+    "@types/sinon": "^10.0.1",
+    "chai": "^4.3.4",
+    "chai-spies": "^1.0.0",
     "electron": "^12.0.7",
     "electron-packager": "^15.2.0",
     "electron-rebuild": "^2.3.5",
@@ -49,7 +57,12 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "mocha": "^8.4.0",
     "ng-packagr": "^12.0.0",
+    "nyc": "^15.1.0",
+    "sinon": "^11.1.1",
+    "ts-mock-imports": "^1.3.7",
+    "ts-node": "^10.0.0",
     "typescript": "~4.2.3"
   }
 }

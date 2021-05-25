@@ -42,9 +42,10 @@ export function readContentsOfDir(dir: string, filter?: (file: string) => boolea
 }
 
 export function removePartsOfPath(path: string, parts: number): string {
-    if (parts === 0) {
+    const startOfLastPart = path.lastIndexOf("/");
+    if (parts <= 0 || startOfLastPart <= 0) {
         return path;
     }
-    const temp = path.substring(0, path.lastIndexOf("/"));
+    const temp = path.substring(0, startOfLastPart);
     return removePartsOfPath(temp, --parts);
 }

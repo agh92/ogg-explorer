@@ -75,6 +75,7 @@
             "polyfills": "projects/renderer/src/polyfills.ts",
             "tsConfig": "projects/renderer/tsconfig.spec.json",
             "karmaConfig": "projects/renderer/karma.conf.js",
+            "codeCoverage": true,
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/renderer/src/assets"

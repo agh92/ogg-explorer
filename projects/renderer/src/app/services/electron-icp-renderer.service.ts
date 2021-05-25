@@ -1,30 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { IpcRenderer, IpcRendererEvent } from "electron";
+import { Observable } from 'rxjs';
+import { ICP_RENDERER_TOKEN } from '../factories/ipc-renderer.factory';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElectronIcpRendererService {
 
-  private ipc!: IpcRenderer;
+  constructor(@Inject(ICP_RENDERER_TOKEN) private ipcRenderer: IpcRenderer) { }
 
-  constructor() {
-    if (window.require) {
-      try {
-        this.ipc = window.require('electron').ipcRenderer;
-      } catch (e) {
-        throw e;
-      }
-    } else {
-      console.warn('Electron\'s IPC was not loaded');
-    }
-  }
+  public on$<T>(channel: string): Observable<T> {
+    const channel$ = new Observable<T>(subscriber => {
+      this.ipcRenderer.on(channel, (event: IpcRendererEvent, args?: T) => {
+        subscriber.next(args);
+      });
+    });
 
-  public on<T>(channel: string, callback: (event: IpcRendererEvent, args?: T) => void) {
-    this.ipc.on(channel, callback);
+    return channel$;
   }
 
   public async invoke<T>(channel: string): Promise<T> {
-    return this.ipc.invoke(channel);
+    return this.ipcRenderer.invoke(channel);
   }
 }
