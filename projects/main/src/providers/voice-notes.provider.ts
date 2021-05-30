@@ -15,7 +15,7 @@ export class VoiceNotesProvider {
                     location,
                     type: 'audio/ogg',
                     name: file,
-                    length: await fileUtils.countOggPackets(location)
+                    length: fileUtils.getSizeInBytes(location)
                 } as VoiceNote
             });
         return Promise.all(returnValue);

@@ -16,8 +16,7 @@
     "release:electron": "npm run clean:release && npm run build:electron && npm run pack:electron",
     "pack:electron": "cp -r ./node_modules ./dist && cd dist && electron-packager . ogg-explorer --out ./../release",
     "clean:dist": "rm -f -r ./dist",
-    "clean:release": "rm -f -r ./release",
-    "install:ogg": "npm i git://github.com/agh92/node-ogg.git#develop && electron-rebuild"
+    "clean:release": "rm -f -r ./release"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +29,6 @@
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
     "electron-default-menu": "^1.0.2",
-    "ogg": "git://github.com/agh92/node-ogg.git#develop",
     "rxjs": "^6.6.7",
     "sound-play": "^1.1.0",
     "tslib": "^2.1.0",

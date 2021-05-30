@@ -1,30 +1,10 @@
-import { Readable, Writable } from "stream";
 import fs from 'fs';
 
-const ogg = require('ogg');
 const sound = require("sound-play");
 
-export function countOggPackets(file: string): Promise<number> {
-    const decoder: Writable = new ogg.Decoder();
-    const readStream: Readable = fs.createReadStream(file);
-
-    let numberOfPackets = 0;
-
-    decoder.on('stream', (stream: Readable) => {
-        stream.on('data', () => numberOfPackets++);
-    });
-
-    return new Promise(resolve => {
-        decoder.on('finish', () => {
-            console.log(`finish ${file}`);
-            readStream.unpipe(decoder);
-            decoder.end();
-            resolve(numberOfPackets);
-        });
-
-        // pipe the ogg file to the Decoder
-        readStream.pipe(decoder);
-    });
+export function getSizeInBytes(file: string): number {
+    const stats = fs.statSync(file)
+    return stats.size;
 }
 
 export async function playAudioFile(file: string) {

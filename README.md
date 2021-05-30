@@ -11,7 +11,7 @@ The project was created with the angular cli and it's based on electron.
 
 ## Run
 
-Run `npm run buld:start:electron` to run a dev build of the application.
+Run `npm run build:start:electron` to run a dev build of the application.
 
 ## Build
 

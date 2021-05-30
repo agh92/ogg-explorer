@@ -13,20 +13,20 @@ describe('VoiceNotesProvider', () => {
 
     let voiceNotesProvider: VoiceNotesProvider;
     let mockReadContetnsOfDir: SinonStub;
-    let mockCountOggPackets: SinonStub;
+    let mockGetSizeInBytes: SinonStub;
     let mockFiles: string[];
 
     beforeEach(() => {
         voiceNotesProvider = new VoiceNotesProvider();
         mockReadContetnsOfDir = ImportMock.mockFunction(fileUtils, 'readContentsOfDir');
-        mockCountOggPackets = ImportMock.mockFunction(fileUtils, 'countOggPackets');
-        mockCountOggPackets.resolves(0);
+        mockGetSizeInBytes = ImportMock.mockFunction(fileUtils, 'getSizeInBytes');
+        mockGetSizeInBytes.returns(0);
     });
 
     afterEach(() => {
         mockFiles = [];
         mockReadContetnsOfDir.restore();
-        mockCountOggPackets.restore();
+        mockGetSizeInBytes.restore();
     });
 
     describe('getVoiceNotes', () => {
